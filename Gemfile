@@ -3,6 +3,7 @@ source 'https://rubygems.org'
 gem 'rails', '4.1.6'
 gem 'pg'
 gem 'jquery-rails' # For assets precompile step.
+gem 'uglifier', '>= 1.3.0'
 
 group :development do
   gem 'tape', github: 'smashingboxes/tape', tag: '0.2.2'
