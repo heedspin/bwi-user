@@ -6,8 +6,8 @@
 #
 # App Configs
 #
-app_name: bwi-backend
-app_repo: git@github.com:heedspin/bwi.git
+app_name: bwi-user
+app_repo: git@github.com:heedspin/bwi-user.git
 app_env: production
 app_branch: master
 
