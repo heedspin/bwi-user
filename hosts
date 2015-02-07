@@ -1,0 +1,13 @@
+[production]
+prod.bellwetherinsights.com
+
+[staging]
+staging.bellwetherinsights.com
+
+[preproduction]
+preprod.bellwetherinsights.com
+
+[omnibox:children]
+staging
+production
+preproduction
