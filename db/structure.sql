@@ -75,6 +75,44 @@ CREATE TABLE schema_migrations (
 
 
 --
+-- Name: user_activities; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE user_activities (
+    id integer NOT NULL,
+    user_id integer,
+    bwi_auth_session_id integer,
+    user_session_id integer,
+    remote_ip character varying(255),
+    controller character varying(255),
+    action character varying(255),
+    format character varying(255),
+    params text,
+    elapsed_time numeric(10,2),
+    created_at timestamp without time zone
+);
+
+
+--
+-- Name: user_activities_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE user_activities_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: user_activities_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE user_activities_id_seq OWNED BY user_activities.id;
+
+
+--
 -- Name: users; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -98,7 +136,9 @@ CREATE TABLE users (
     unlock_token character varying(255),
     locked_at timestamp without time zone,
     created_at timestamp without time zone,
-    updated_at timestamp without time zone
+    updated_at timestamp without time zone,
+    company character varying(255),
+    service_level_id integer
 );
 
 
@@ -132,6 +172,13 @@ ALTER TABLE ONLY bwi_auth_sessions ALTER COLUMN id SET DEFAULT nextval('bwi_auth
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
+ALTER TABLE ONLY user_activities ALTER COLUMN id SET DEFAULT nextval('user_activities_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
 ALTER TABLE ONLY users ALTER COLUMN id SET DEFAULT nextval('users_id_seq'::regclass);
 
 
@@ -141,6 +188,14 @@ ALTER TABLE ONLY users ALTER COLUMN id SET DEFAULT nextval('users_id_seq'::regcl
 
 ALTER TABLE ONLY bwi_auth_sessions
     ADD CONSTRAINT bwi_auth_sessions_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: user_activities_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY user_activities
+    ADD CONSTRAINT user_activities_pkey PRIMARY KEY (id);
 
 
 --
@@ -195,4 +250,10 @@ SET search_path TO "$user",public;
 INSERT INTO schema_migrations (version) VALUES ('20141215172151');
 
 INSERT INTO schema_migrations (version) VALUES ('20150127174112');
+
+INSERT INTO schema_migrations (version) VALUES ('20150214133250');
+
+INSERT INTO schema_migrations (version) VALUES ('20150214151617');
+
+INSERT INTO schema_migrations (version) VALUES ('20150303195453');
 
